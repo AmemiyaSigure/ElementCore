@@ -2,17 +2,18 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://jitpack.io" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-
 version = "0.2.5"
-group = "com.elementtimes" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.github.luiqn2007" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "elementcore"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -78,4 +79,11 @@ processResources {
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+repositories {
+  maven {
+      url 'https://jitpack.io'
+      credentials { username authToken }
+  }
 }
