@@ -12,8 +12,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Arrays;
@@ -61,8 +63,13 @@ public class ForgeRegister {
                 //noinspection ConstantConditions
                 itemBlock.setRegistryName(block.getRegistryName());
                 registry.register(itemBlock);
-                if (mElements.blockTileEntities != null && mElements.blockTileEntities.containsKey(block)) {
-                    GameRegistry.registerTileEntity(mElements.blockTileEntities.get(block).right, new ResourceLocation(mElements.container.id(), mElements.blockTileEntities.get(block).left));
+                if (mElements.blockTileEntities != null
+                        && mElements.blockTileEntities.containsKey(block)) {
+                    try {
+                        GameRegistry.registerTileEntity(mElements.blockTileEntities.get(block).right, new ResourceLocation(mElements.container.id(), mElements.blockTileEntities.get(block).left));
+                    } catch (IllegalArgumentException ignored) {
+                        
+                    }
                 }
             });
 
