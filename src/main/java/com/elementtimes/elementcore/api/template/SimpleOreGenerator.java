@@ -38,9 +38,9 @@ public class SimpleOreGenerator extends WorldGenerator {
     public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position) {
         if (canGenerator(worldIn.provider.getDimension())) {
             for (int i = 0; i < times; i++) {
-                int x = position.getX() + 8;
+                int x = position.getX() + rand.nextInt(16) - 8;
                 int y = yMin + rand.nextInt(yRange);
-                int z = position.getZ() + 8;
+                int z = position.getZ() + rand.nextInt(16) - 8;
                 if (rand.nextFloat() <= probability) {
                     mWorldGenerator.generate(worldIn, rand, new BlockPos(x, y, z));
                 }
